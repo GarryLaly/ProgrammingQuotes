@@ -8,35 +8,26 @@ const quoteNode = (story) => {
 
 const addQuoteRandom = (quote) => {
   const html = `<div class="quoteItem">
-     <div>${quote.en}</div>
-     <div>- ${quote.author}</div>
+     <div class="quoteItem-title">${quote.en}</div>
+     <div class="quoteItem-author">- ${quote.author}</div>
     </div>`;
   quotesDiv.appendChild(quoteNode(html));
 };
 
-if (
-  localStorage.lastFetch &&
-  localStorage.quotes &&
-  new Date() - localStorage.lastFetch < 1000 * 60 * 60
-) {
+if (localStorage.quotes) {
   addQuoteRandom(JSON.parse(localStorage.quotes));
-} else {
-  if (localStorage.quotes) {
-    addQuoteRandom(JSON.parse(localStorage.quotes));
-  }
-
-  fetch("https://programming-quotes-api.herokuapp.com/quotes/random", {
-    method: "GET",
-    mode: "cors",
-    credentials: "include",
-  })
-    .then((response) => response.json())
-    .then((data) => {
-      if (!localStorage.quotes) {
-        addQuoteRandom(data);
-      }
-
-      localStorage.setItem("quotes", JSON.stringify(data));
-      localStorage.setItem("lastFetch", new Date() - 1);
-    });
 }
+
+fetch("https://programming-quotes-api.herokuapp.com/quotes/random", {
+  method: "GET",
+  mode: "cors",
+  credentials: "include",
+})
+  .then((response) => response.json())
+  .then((data) => {
+    if (!localStorage.quotes) {
+      addQuoteRandom(data);
+    }
+
+    localStorage.setItem("quotes", JSON.stringify(data));
+  });
