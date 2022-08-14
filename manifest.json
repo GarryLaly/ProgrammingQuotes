@@ -1,0 +1,20 @@
+{
+    "manifest_version": 3,
+    "name": "Programming Quotes",
+    "version": "1.0",
+    "description": "Get Inspirational Programming Quotes",
+    "author": "Garry Priambudi",
+    "chrome_url_overrides" : {
+      "newtab": "index.html"
+    },
+    "permissions": [
+      "storage"
+    ],
+    "host_permissions" : [
+        "https://programming-quotes-api.herokuapp.com/"
+    ],
+    "icons": {
+      "16": "icon16.png",
+      "128": "icon128.png"
+    }
+  }
